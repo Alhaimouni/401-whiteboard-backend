@@ -15,7 +15,7 @@ router.delete('/post/:id', deletePost);
 async function addPost(req, res) {
     let post = req.body;
     await posts.create(post);
-    res.status(200).send('Done');
+    res.status(201).send('Done');
 };
 async function getAllPosts(req, res) {
     let allPosts = await posts.findAll();
@@ -34,7 +34,7 @@ async function updatePost(req, res) {
     // const postForUpdate = await posts.findOne({where: {id: id}});
     // const updatedPost = await postForUpdate.update(newData);
     const updatedPost = await posts.update(newData, { where: { id: postId } });
-    res.status(200).send(updatedPost);
+    res.status(202).send(updatedPost);
 
 };
 async function deletePost(req, res) {
