@@ -14,18 +14,18 @@ postgres=# create database firstdb;
 
 */
 
-// url = postgresql://malhaimouni@localhost:5432/firstdb
 
-const POSTGRES_URL = process.env.HEROKU_POSTGRESQL_MAUVE_URL || process.env.DATABASE_URL ;
+const POSTGRES_URL = process.env.DATABASE_URL;
 
 let sequelizeOptions = {
 
-    dialectOptions : {
-        ssl : {
-            require : true,
-            rejectUnauthorized: false
-        }
-    }
+    // dialectOptions : {
+    //     ssl : {
+    //         require : false,
+    //         rejectUnauthorized: false
+    //     }
+    // }
+
 };
 
 let sequelize = new Sequelize(POSTGRES_URL , sequelizeOptions);
