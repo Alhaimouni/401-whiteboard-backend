@@ -17,7 +17,7 @@ postgres=# create database firstdb;
 // url = postgresql://malhaimouni@localhost:5432/firstdb
 //process.env.HEROKU_POSTGRESQL_MAUVE_URL
 
-const POSTGRES_URL = process.env.DATABASE_URL ;
+const POSTGRES_URL = process.env.DATABASE_URL ||`postgres://malhaimouni@localhost:5432/firstdb`;
 
 let sequelizeOptions = {
 
