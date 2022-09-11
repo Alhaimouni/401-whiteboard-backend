@@ -14,8 +14,8 @@ router.delete('/post/:id', deletePost);
 
 async function addPost(req, res) {
     let post = req.body;
-    await posts.create(post);
-    res.status(201).send('Done');
+    let x = await posts.create(post);
+    res.status(201).send(x);
 };
 async function getAllPosts(req, res) {
     let allPosts = await posts.findAll();
@@ -34,13 +34,14 @@ async function updatePost(req, res) {
     // const postForUpdate = await posts.findOne({where: {id: id}});
     // const updatedPost = await postForUpdate.update(newData);
     const updatedPost = await posts.update(newData, { where: { id: postId } });
-    res.status(202).send(updatedPost);
+    const moew = await posts.findOne({ where: { id: postId } });
+    res.status(202).send(moew);
 
 };
 async function deletePost(req, res) {
     const postId = req.params.id;
     await posts.destroy({ where: { id: postId } });
-    res.status(204).json('Done');
+    res.status(204).json('Nothing');
 };
 
 module.exports = router;
