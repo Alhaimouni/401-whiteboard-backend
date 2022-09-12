@@ -2,7 +2,7 @@
 
 const { Sequelize, DataTypes } = require('sequelize');
 const { createPostsTable } = require('./post.model');
-const { createCarsTable } = require('./cars.model');
+// const { createCarsTable } = require('./cars.model');
 
 require('dotenv').config();
 
@@ -19,12 +19,12 @@ const POSTGRES_URL = process.env.DATABASE_URL;
 
 let sequelizeOptions = {
 
-    // dialectOptions : {
-    //     ssl : {
-    //         require : false,
-    //         rejectUnauthorized: false
-    //     }
-    // }
+    dialectOptions : {
+        ssl : {
+            require : true,
+            rejectUnauthorized: false
+        }
+    }
 
 };
 
@@ -39,6 +39,6 @@ module.exports = {
 
     posts: createPostsTable(sequelize, DataTypes), // for create the posts table and then use it in the routes.
 
-    cars: createCarsTable(sequelize, DataTypes) // for creat the cars table and then use it in the routes.
+    // cars: createCarsTable(sequelize, DataTypes) // for creat the cars table and then use it in the routes.
 
 }

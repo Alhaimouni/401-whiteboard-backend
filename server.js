@@ -21,7 +21,7 @@ function start(port) {
 app.get('/',handleMain);
 
 
-app.use(errHandler);
 app.use('*',notFoundHandler);
+app.use(errHandler);
 
 module.exports = { start, app };

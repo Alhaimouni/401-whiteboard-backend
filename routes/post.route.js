@@ -13,6 +13,7 @@ router.delete('/post/:id', deletePost);
 
 
 async function addPost(req, res) {
+    
     let post = req.body;
     let x = await posts.create(post);
     res.status(201).send(x);
@@ -41,7 +42,7 @@ async function updatePost(req, res) {
 async function deletePost(req, res) {
     const postId = req.params.id;
     await posts.destroy({ where: { id: postId } });
-    res.status(204).json('Nothing');
+    res.status(204).end();
 };
 
 module.exports = router;
