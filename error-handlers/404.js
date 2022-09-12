@@ -2,7 +2,7 @@
 
 function notFoundHandler(req,res) {
 
-    res.send({
+    res.status(404).send({
         code : 404,
         Message : `Not Route found`
     })
