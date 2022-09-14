@@ -11,12 +11,12 @@ const POSTGRES_URL = process.env.DATABASE_URL;
 
 let sequelizeOptions = {
 
-    // dialectOptions : {
-    //     ssl : {
-    //         require : false,
-    //         rejectUnauthorized: false
-    //     }
-    // }
+    dialectOptions : {
+        ssl : {
+            require : false,
+            rejectUnauthorized: false
+        }
+    }
 
 };
 
@@ -28,15 +28,16 @@ const posts = new CrudOperations(postsModel);
 const commentModel = createCommentTable(sequelize,DataTypes);
 const comments = new CrudOperations(commentModel);
 
-
-
-
+postsModel.hasMany(commentModel,{foreignKey:'textId',sourceKey:'id'});
+commentModel.belongsTo(postsModel,{foreignKey:'textId',targetKey:'id'});
 
 
 module.exports = {
 
-    dataBase: sequelize,  // for reel connection and will use in index.js
-    posts, // for create the posts table and then use it in the routes.
-    comments, // for create the posts table and then use it in the routes.
+    posts, 
+    comments,
+    postsModel,
+    commentModel,
+    dataBase: sequelize,
 
 }
