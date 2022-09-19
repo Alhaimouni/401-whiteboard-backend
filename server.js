@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const postsRouters = require('./routes/post.route');
 const commentsRouters = require('./routes/comment.route');
+const usersRouters = require('./routes/user.route');
 const { errHandler } = require('./error-handlers/500');
 const { notFoundHandler } = require('./error-handlers/404');
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(postsRouters);
 app.use(commentsRouters);
+app.use(usersRouters);
 
 function handleMain(req,res) {
     res.status(200).send('at the main page')
