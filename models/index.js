@@ -13,10 +13,10 @@ const POSTGRES_URL = process.env.DATABASE_URL;
 let sequelizeOptions = {
 
     dialectOptions : {
-        ssl : {
-            require : false,
-            rejectUnauthorized: false
-        }
+        // ssl : {
+        //     require : false,
+        //     rejectUnauthorized: false
+        // }
     }
 
 };
@@ -37,6 +37,7 @@ const commentModel = createCommentTable(sequelize, DataTypes);
 const comments = new CrudOperations(commentModel);
 
 const usersModel = createUsersTable(sequelize, DataTypes);
+
 
 postsModel.hasMany(commentModel, { foreignKey: 'textId', sourceKey: 'id' });
 commentModel.belongsTo(postsModel, { foreignKey: 'textId', targetKey: 'id' });
