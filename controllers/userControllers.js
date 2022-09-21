@@ -21,25 +21,7 @@ async function signup(req, res) {
 
 
 async function login(req, res) {
-    try {
-        const BasicAuth = req.headers.authorization;
-        const encodedData = BasicAuth.split(' ')[1];
-        const decodedData = base64.decode(encodedData);
-        const [username, pass] = decodedData.split(':');
-        let user = await usersModel.findOne({ where: { userName: username } });
-        if (user) {
-            const checkPassResult = await bcrypt.compare(pass, user.passWord);
-            if (checkPassResult) {
-                res.status(200).json(`welcome back ${user.userName}`);
-            } else {
-                res.status(401).send('Enter valid password');
-            }
-        } else {
-            res.status(401).send('No account found at this username');
-        }
-    } catch (e) {
-        console.log(e);
-    }
+    res.status(200).json(req.newUserWithToken);
 }
 
 
