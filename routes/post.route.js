@@ -2,8 +2,10 @@
 
 const express = require('express');
 const { posts, postsModel, commentModel } = require('../models');
+const { bearerAuth } = require('../middlewares/bearerAuth');
 const router = express.Router();
 
+router.use(bearerAuth);
 
 router.post('/post', addPost);
 router.get('/post', getAllPosts);
