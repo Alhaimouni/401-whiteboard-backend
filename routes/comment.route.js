@@ -1,11 +1,11 @@
 'use strict';
 
 const express = require('express');
-const { comments, postsModel, commentModel } = require('../models/index');
+const { comments, postsModel, commentModel, usersModel } = require('../models/index');
 const router = express.Router();
 
 
-router.post('/comment/:postId', addComment);
+router.post('/comment/:postId/:userID', addComment);
 router.get('/comment', getAllComments);
 router.get('/comment/:id', gitOneComment);
 router.put('/comment/:id', updateComment);
@@ -13,17 +13,32 @@ router.delete('/comment/:id', deleteComment);
 
 
 
+// async function addComment(req, res) {
+//     const { postId, userID } = req.params;
+//     const obj = {
+//         text: req.body.text,
+//         textId: postId,
+//         userId: userID
+//     }
+//     await commentModel.create(obj);
+//     let commentsForId = await commentModel.findAll({ where: { textId: postId } })
+//     res.status(201).send(commentsForId);
+// };
+
 async function addComment(req, res) {
-    const { postId } = req.params;
+    const { postId, userID } = req.params;
     const obj = {
         text: req.body.text,
         textId: postId,
+        userId: userID
     }
     await commentModel.create(obj);
-    // let x = await commentModel.findAll({ include: postsModel , where: { textId: postId } })
-    let commentsForId = await commentModel.findAll({ where: { textId: postId } })
+    let commentsForId = await commentModel.findAll({ where: { textId: postId }, include: [usersModel, postsModel] })
     res.status(201).send(commentsForId);
 };
+
+
+
 async function getAllComments(req, res) {
     res.status(200).send(await comments.getFrom());
 };

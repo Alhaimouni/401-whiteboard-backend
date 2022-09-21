@@ -6,6 +6,7 @@ function createCommentTable(dataBase, DataType) {
 
         text: { type: DataType.STRING, allowNull: false },
         textId: { type: DataType.INTEGER, allowNull: false },
+        userId: { type: DataType.INTEGER, allowNull: false },
 
     });
 
