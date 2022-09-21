@@ -11,9 +11,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(postsRouters);
 app.use(commentsRouters);
 app.use(usersRouters);
+app.use(postsRouters);
 
 function handleMain(req,res) {
     res.status(200).send('at the main page')
