@@ -13,18 +13,6 @@ router.delete('/comment/:id', deleteComment);
 
 
 
-// async function addComment(req, res) {
-//     const { postId, userID } = req.params;
-//     const obj = {
-//         text: req.body.text,
-//         textId: postId,
-//         userId: userID
-//     }
-//     await commentModel.create(obj);
-//     let commentsForId = await commentModel.findAll({ where: { textId: postId } })
-//     res.status(201).send(commentsForId);
-// };
-
 async function addComment(req, res) {
     const { postId, userID } = req.params;
     const obj = {
@@ -33,9 +21,21 @@ async function addComment(req, res) {
         userId: userID
     }
     await commentModel.create(obj);
-    let commentsForId = await commentModel.findAll({ where: { textId: postId }, include: [usersModel, postsModel] })
+    let commentsForId = await commentModel.findAll({ where: { textId: postId } })
     res.status(201).send(commentsForId);
 };
+
+// async function addComment(req, res) {
+//     const { postId, userID } = req.params;
+//     const obj = {
+//         text: req.body.text,
+//         textId: postId,
+//         userId: userID
+//     }
+//     await commentModel.create(obj);
+//     let commentsForId = await commentModel.findAll({ where: { textId: postId }, include: [usersModel, postsModel] })
+//     res.status(201).send(commentsForId);
+// };
 
 
 
